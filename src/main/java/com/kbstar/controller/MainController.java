@@ -24,4 +24,22 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("center", "login");
+        return "index";
+    }
+
+    @RequestMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("center", "register");
+        return "index";
+    }
+
+    @RequestMapping("/livechart")
+    public String liveChart(Model model) {
+        model.addAttribute("center", "livechart");
+        return "index";
+    }
+
 }
