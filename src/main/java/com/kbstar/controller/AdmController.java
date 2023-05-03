@@ -20,27 +20,31 @@ public class AdmController {
 
     @RequestMapping("/loginimpl")
     public String login(Model model, String id, String pwd, HttpSession session) throws Exception {
-        Adm admin = null;
+        Adm adm = null;
         String nextPage = "loginfail";
         try {
-            admin = service.get(id);
-            if (admin != null && encoder.matches(pwd, admin.getPwd())) {
+            adm = service.get(id);
+            if (adm != null && encoder.matches(pwd, adm.getPwd())) {
                 nextPage = "loginok";
-                session.setAttribute("loginadm", admin);
+                session.setAttribute("loginadm", adm);
+
             }
         } catch (Exception e) {
-            model.addAttribute("center", "loginfail");
+
             throw new Exception("어드민 회원 아이디 혹은 패스워드가 달라요!");
         }
         model.addAttribute("center", nextPage);
-        model.addAttribute("adm", admin);
         return "index";
     }
 
     @RequestMapping("/logout")
-    public String logout(Model model, HttpSession session) throws Exception {
-        session.invalidate();
-        return "index";
+    public String logout(HttpSession session) {
+        //세션에 있는 정보를 없애는 내용
+        if (session != null) {
+            //세션에 있는 모든 정보를 없애라
+            session.invalidate();
+        }
+        return "redirect:/";
     }
 
     @RequestMapping("/myinfo")
@@ -64,7 +68,6 @@ public class AdmController {
         } catch (Exception e) {
             throw new Exception("회원 등록이 실패했어요 다시 시도해주세요");
         }
-        model.addAttribute("adm", adm);
         session.setAttribute("loginadm", adm);
         model.addAttribute("center", "registerok");
         return "index";
@@ -78,6 +81,6 @@ public class AdmController {
         } catch (Exception e) {
             throw new Exception("회원 등록이 실패했어요 다시 시도해주세요");
         }
-        return "redirect:/myinfo";
+        return "redirect:/myinfo?id=" + adm.getId();
     }
 }

@@ -2,14 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<h1 class="h3 mb-2 text-gray-500">Item Add</h1>
+
 <div class="card shadow mb-4">
-<div class="col-sm-8 text-left">
-    <div class="container">REGISTER</div>
-</div>
+    <div class="col-sm-8 text-left">
+        <div class="container">Item Add</div>
+    </div>
     <div class="card-body">
-        <div class="col-sm-8 text-left">
-            <h2>등록 완료 페이지</h2>
-            <h4>${loginadm.id} 의 관리자 등록 및 로그인이 성공하였습니다.</h4>
-        </div>
+        <div id="container"></div>
     </div>
 </div>

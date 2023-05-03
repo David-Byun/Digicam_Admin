@@ -361,20 +361,18 @@
                         </c:when>
                         <c:otherwise>
                             <li class="nav-item no-arrow">
-                                <a href="/login" role="button"><span class="mr-2 d-none d-lg-inline text-gray-600 small">Log Out</span></a>
+                                <a href="/logout" role="button"><span class="mr-2 d-none d-lg-inline text-gray-600 small">Log Out</span></a>
                             </li>
                             <li class="nav-item no-arrow">
                                 <a class="nav-link dropdown-toggle" href="/myinfo?id=${loginadm.id}" role="button"
                                    aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">${loginadm.id}</span>
                                     <img class="img-profile rounded-circle"
-                                         src="img/undraw_profile.svg">
+                                         src="img/undraw_profile.svg" />
                                 </a>
                             </li>
                         </c:otherwise>
                     </c:choose>
-
-
                 </ul>
 
             </nav>
