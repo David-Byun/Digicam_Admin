@@ -10,7 +10,7 @@ import java.util.List;
 
 @Slf4j  //log
 @Service
-public class ItemService implements KBService<String, Item> {
+public class ItemService implements KBService<Integer, Item> {
 
     @Autowired
     ItemMapper mapper;
@@ -23,7 +23,7 @@ public class ItemService implements KBService<String, Item> {
     }
 
     @Override
-    public void remove(String s) throws Exception {
+    public void remove(Integer s) throws Exception {
         mapper.delete(s);
     }
 
@@ -33,7 +33,7 @@ public class ItemService implements KBService<String, Item> {
     }
 
     @Override
-    public Item get(String s) throws Exception {
+    public Item get(Integer s) throws Exception {
         return mapper.select(s);
     }
 

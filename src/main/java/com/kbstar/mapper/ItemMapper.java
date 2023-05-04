@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
-public interface ItemMapper extends KBMapper<String, Item> {
+public interface ItemMapper extends KBMapper<Integer, Item> {
 
 }

@@ -5,7 +5,7 @@
 <mapper namespace="com.kbstar.mapper.ItemMapper">
 
 <!--custDTO = cust-->
-    <select id="select" parameterType="String" resultType="item">
+    <select id="select" parameterType="Integer" resultType="item">
     -- select 하면 String이 들어오고 item를 리턴
         SELECT * FROM item WHERE id=#{id}
         -- 입력한 값이 id가 됨
@@ -23,8 +23,7 @@
         UPDATE item SET name=#{name},price=#{price},imgname=#{imgname} WHERE id=#{id}
     </update>
 
-    <delete id="delete" parameterType="String">
-    -- id가 string으로 들어오면 해당 id를 삭제한다
+    <delete id="delete" parameterType="Integer">
         DELETE FROM item WHERE id=#{id}
     </delete>
 

@@ -2,23 +2,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script>
-    let item_add = {
+    let marker_add = {
         init : function () {
             $('#register_btn').click(function () {
-                item_add.send();
+                marker_add.send();
             });
         },
         send : function () {
             $('#register_form').attr({
                 method:'post',
-                action:'/item/addimpl',
+                action:'/marker/addimpl',
                 enctype: 'multipart/form-data'
             });
             $('#register_form').submit();
         }
     };
     $(function () {
-        item_add.init();
+        marker_add.init();
     });
 </script>
 
@@ -26,7 +26,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <h1 class="h3 mb-2 text-gray-800">Marker Add</h1>
     <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
         For more information about DataTables, please visit the <a target="_blank"
                                                                    href="https://datatables.net">official DataTables documentation</a>.</p>
@@ -34,28 +34,48 @@
     <!-- DataTales Form -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Item Add</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Marker Add</h6>
         </div>
         <div class="card-body">
             <form id="register_form" class="form-horizontal well">
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="name">Name :</label>
+                    <label class="control-label col-sm-2" for="title">TITLE :</label>
                     <div class="col-sm-10">
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Enter name">
+                        <input type="text" name="title" class="form-control" id="title" placeholder="Enter Title">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="price">PRICE :</label>
+                    <label class="control-label col-sm-2" for="target">TARGET :</label>
                     <div class="col-sm-10">
-                        <input type="number" name="price" class="form-control" id="price" placeholder="Enter price">
+                        <input type="text" name="target" class="form-control" id="target" placeholder="Enter price">
                     </div>
                 </div>
                 <%-- 이미지 한번에 업로드 할 수 있다.--%>
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="img">Image :</label>
+                    <label class="control-label col-sm-2" for="lat">LAT :</label>
                     <div class="col-sm-10">
-                        <input type="file" name="img" class="form-control" id="img" placeholder="Input image">
+                        <input type="number" name="lat" class="form-control" id="lat" placeholder="Input LAT">
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="lat">LAT :</label>
+                    <div class="col-sm-10">
+                        <input type="number" name="lng" class="form-control" id="lng" placeholder="Input LNG">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="img">IMG :</label>
+                    <div class="col-sm-10">
+                        <input type="file" name="img" class="form-control" id="img" placeholder="Input IMG">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loc">Select LOC</label>
+                    <select class="form-control" id="loc" name="loc">
+                        <option>S</option>
+                        <option>B</option>
+                        <option>J</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
