@@ -10,7 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=877b72a4084b62dd3183b611e21359eb"></script>
     <!-- HighChart Library -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/highcharts-3d.js"></script>
@@ -173,6 +175,20 @@
                 <span>Live Chart</span></a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" href="/websocket">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Websocket</span>
+            </a>
+        </li>
+        <c:if test="${loginadm != null}">
+            <li class="nav-item">
+                <a class="nav-link" href="/websocket">
+                    <i class="fas fa-fw fa-cart-area"></i>
+                    <span>websocket</span>
+                </a>
+            </li>
+        </c:if>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 

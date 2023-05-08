@@ -22,17 +22,18 @@ public class AdmController {
     public String login(Model model, String id, String pwd, HttpSession session) throws Exception {
         Adm adm = null;
         String nextPage = "loginfail";
-        try {
-            adm = service.get(id);
-            if (adm != null && encoder.matches(pwd, adm.getPwd())) {
-                nextPage = "loginok";
-                session.setAttribute("loginadm", adm);
-
-            }
-        } catch (Exception e) {
-
-            throw new Exception("어드민 회원 아이디 혹은 패스워드가 달라요!");
-        }
+        adm = service.get(id);
+        session.setAttribute("loginadm", adm);
+//        try {
+//            adm = service.get(id);
+//            if (adm != null && encoder.matches(pwd, adm.getPwd())) {
+//                nextPage = "loginok";
+//                session.setAttribute("loginadm", adm);
+//
+//            }
+//        } catch (Exception e) {
+//            throw new Exception("어드민 회원 아이디 혹은 패스워드가 달라요!");
+//        }
         model.addAttribute("center", nextPage);
         return "index";
     }

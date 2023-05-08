@@ -35,6 +35,7 @@
                 <div class="form-group">
                     <label for="loc">위치</label>
                     <select class="form-control" id="loc" name="loc">
+                        <option>지역</option>
                         <option value="S" <c:if test="${ms.loc == 'S'}">selected</c:if>>서울</option>
                         <option value="B" <c:if test="${ms.loc == 'B'}">selected</c:if>>부산</option>
                         <option value="J" <c:if test="${ms.loc == 'J'}">selected</c:if>>제주</option>

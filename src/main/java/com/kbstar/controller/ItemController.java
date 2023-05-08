@@ -1,6 +1,7 @@
 package com.kbstar.controller;
 
 import com.kbstar.dto.Item;
+import com.kbstar.dto.ItemSearch;
 import com.kbstar.service.ItemService;
 import com.kbstar.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
@@ -83,7 +84,6 @@ public class ItemController {
     @RequestMapping("/detail")
     public String detail(Model model, int id) throws Exception {
         Item item = null;
-
         item = itemService.get(id);
         model.addAttribute("gitem", item);
         model.addAttribute("center", "item/detail");
@@ -94,5 +94,16 @@ public class ItemController {
     public String deleteimpl(int id) throws Exception {
         itemService.remove(id);
         return "redirect:/item/all";
+    }
+
+    @RequestMapping("/search")
+    public String search(Model model, ItemSearch ms) throws Exception {
+        log.info("============== ms =========== {}", ms);
+        List<Item> list = null;
+        list = itemService.search(ms);
+        model.addAttribute("ilist",list);
+        model.addAttribute("ms", ms);
+        model.addAttribute("center", dir + "all");
+        return "index";
     }
 }

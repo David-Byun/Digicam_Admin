@@ -27,4 +27,24 @@
         DELETE FROM item WHERE id=#{id}
     </delete>
 
+    <select id="search" parameterType="itemSearch" resultType="item">
+        SELECT * FROM item
+        <where>
+            <!-- &gt; 의 의미가 > 를 뜻함-->
+            <if test="startdate != null and !startdate.equals('') ">
+                rdate &gt;= TO_DATE(#{startdate},'YYYY-MM-DD')
+            </if>
+            <!-- &lt; 의 의미가 < 를 뜻함-->
+            <if test="enddate != null and !enddate.equals('')">
+                AND rdate &lt;= TO_DATE(#{enddate},'YYYY-MM-DD')+0.9999
+            </if>
+            <if test="name != null and !name.equals('') ">
+                AND name LIKE '%'||#{name}||'%'
+            </if>
+            <if test="price != null and !price.equals('')">
+                AND price &gt;= #{price}
+            </if>
+        </where>
+    </select>
+
 </mapper>

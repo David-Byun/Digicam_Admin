@@ -18,6 +18,12 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping("/websocket")
+    public String websocket(Model model) {
+        model.addAttribute("center", "websocket");
+        return "index";
+    }
+
     @RequestMapping("/chart")
     public String chart(Model model) {
         model.addAttribute("center", "chart");
