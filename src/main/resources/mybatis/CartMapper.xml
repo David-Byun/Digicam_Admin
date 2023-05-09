@@ -34,7 +34,7 @@
         AND c.item_id = it.id
         AND c.cust_id = #{id}
     </select>
-    <select id="selectall" parameterType="String" resultType="cart">
+    <select id="selectall" resultType="cart">
         SELECT c.id as cart_id
              , c.cust_id
              , c.item_id
@@ -47,7 +47,6 @@
         FROM cart c, cust cu, item it
         WHERE c.cust_id = cu.id
         AND c.item_id = it.id
-        AND c.cust_id = #{cid}
     </select>
     <insert id="insert" parameterType="cart">
         INSERT INTO cart VALUES (cart_seq.NEXTVAL,#{custId},#{itemId},#{cnt},SYSDATE)

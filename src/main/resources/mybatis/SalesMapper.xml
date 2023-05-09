@@ -9,6 +9,13 @@
     <insert id="insert" parameterType="sales">
         INSERT INTO sales (rdate, price, gender) VALUES (TO_DATE(#{rdate}),#{price},#{gender})
     </insert>
-
-
+    <select id="getMonthly" resultType="sales">
+        SELECT case when gender = 'F' then '여성' else '남성' end as gender,
+               sum(price) as sum,
+               TO_CHAR(rdate, 'YYYY-MM') AS monthly
+        FROM sales WHERE rdate>=TO_DATE('2018-01-01', 'YYYY-MM-DD')
+                     AND rdate&lt;TO_DATE('2025-01-01', 'YYYY-MM-DD')
+        GROUP BY TO_CHAR(rdate, 'YYYY-MM'), GENDER
+        ORDER BY MONTHLY
+    </select>
 </mapper>

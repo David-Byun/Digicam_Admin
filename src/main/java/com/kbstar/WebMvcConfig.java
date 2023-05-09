@@ -10,11 +10,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
     // 이미지 dir
     @Value("${imgdir}")
     String imgdir;
-
-
+    // 로그 dir
+    @Value("${logdir}")
+    String logdir;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/uimg/**").addResourceLocations(imgdir);
+        registry.addResourceHandler("/log/**").addResourceLocations(logdir);
     }
 }

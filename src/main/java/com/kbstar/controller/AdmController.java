@@ -17,7 +17,6 @@ public class AdmController {
     private final AdmService service;
     private final BCryptPasswordEncoder encoder;
 
-
     @RequestMapping("/loginimpl")
     public String login(Model model, String id, String pwd, HttpSession session) throws Exception {
         Adm adm = null;

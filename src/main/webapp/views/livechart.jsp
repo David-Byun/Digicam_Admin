@@ -12,7 +12,7 @@
 <script>
     let chart04 = {
         init : function () {
-            var defaultData = 'http://localhost:8083/log/custinfo.log';
+            var defaultData = '${adminserver}/log/cartinfo.log';
             var urlInput = document.getElementById('fetchURL');
             var pollingCheckbox = document.getElementById('enablePolling');
             var pollingInput = document.getElementById('pollingTime');
@@ -64,26 +64,7 @@
     });
 </script>
 <div class="col-sm-8 text-left">
-    <div class="container" id="container"><div>
+    <div class="container" id="container"></div>
 
-        <div class="ld-row">
-            <label class="ld-label">
-                Enable Polling
-            </label>
-            <input type="checkbox" checked="checked" id="enablePolling"/>
-        </div>
-        <div class="ld-row">
-            <label class="ld-label">
-                Polling Time (Seconds)
-            </label>
-            <input class="ld-time-input" type="number" value="2" id="pollingTime"/>
-        </div>
-        <div class="ld-row">
-            <label class="ld-label">
-                CSV URL
-            </label>
-            <input class="ld-url-input" type="text" id="fetchURL"/>
-        </div>
-    </div>
-    </div>
+
 </div>

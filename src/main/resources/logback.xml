@@ -34,13 +34,13 @@
     <!-- 파일 경로 및 설정 -->
     <appender name="FILE2" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 아래 폴더에 로그 찍겠다 -->
-        <file>${LOGS_DIR}/custinfo.log</file>
+        <file>${LOGS_DIR}/cartinfo.log</file>
         <encoder>
             <!-- 이런 형식으로 로그를 찍겠다 -->
             <pattern>%d{yyyy-MM-dd HH:mm:ss}, %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOGS_DIR}/custinfo.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <fileNamePattern>${LOGS_DIR}/cartinfo.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>5MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -62,8 +62,11 @@
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </logger>
-    <!-- 아래 클래스에서 발생되는 행위가 있으면 아래 폴더에 조정하겠다 -->
-    <logger name="com.kbstar.controller.CustController" level="INFO">
+    <!--
+        아래 클래스에서 발생되는 행위가 있으면 아래 폴더에 조정하겠다
+        SchedulerController에서 발생되는 info 로그는 다음 경로에 찍겠다.
+     -->
+    <logger name="com.kbstar.controller.SchedulerController" level="INFO">
         <appender-ref ref="FILE2" />
     </logger>
 
