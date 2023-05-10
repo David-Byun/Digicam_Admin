@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="EUC-KR" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-
-
 <style>
     #container {
         height: 400px;
@@ -52,6 +50,7 @@
     }
 </style>
 
+
 <script>
     let websocket_center = {
         stompClient:null,
@@ -93,11 +92,21 @@
             });
         }
     };
-
-    let salesChart = {
-        init:function (){
-            //内靛 矫累
-            // Data retrieved from https://yearbook.enerdata.net/electricity/world-electricity-production-statistics.html
+    let getData = {
+        init : function () {
+            $.ajax({
+                type : 'GET',
+                url : '/salesimpl',
+                success : function (result) {
+                    getData.barDisplay(result);
+                    getData.pieDisplay(result);
+                },
+                error  : function (err) {
+                    alert(err);
+                }
+            })
+        },
+        barDisplay : function (result) {
             Highcharts.chart('scontainer', {
                 chart: {
                     type: 'column',
@@ -150,39 +159,21 @@
                         depth: 40
                     }
                 },
+
                 series: [{
                     name: 'M',
-                    data: ,
+                    data: result.male,
                     stack: 'male'
                 }, {
                     name: 'F',
-                    data: [1],
+                    data: result.female,
                     stack: 'female'
                 }]
             });
             //内靛 场
 
-        }
-    };
-    let getData = {
-        init : function () {
-
-            let year = [];
-            let sumMale = [];
-            let sumFemale = [];
-            for (a of ${dataMale}) {
-                year.push(a.monthly);
-                sumMale.push(a.sum);
-            }
-            for (b of ${dataFemale}) {
-                sumFemale.push(b.sum);
-            }
-
-        }
-    }
-    let pieChart = {
-        init:function (){
-            // Create the chart
+        },
+        pieDisplay : function (result) {
             Highcharts.chart('pcontainer', {
                 chart: {
                     type: 'pie'
@@ -223,12 +214,12 @@
                         data: [
                             {
                                 name: 'M',
-                                y: 50,
+                                y: result.male.reduce((a,b)=>a+b,0) / (result.male.reduce((a,b)=>a+b, 0)+result.female.reduce((a,b)=>a+b,0)) * 100,
                                 drilldown: 'M'
                             },
                             {
                                 name: 'F',
-                                y: 50,
+                                y: result.female.reduce((a,b)=>a+b,0) / (result.male.reduce((a,b)=>a+b, 0)+result.female.reduce((a,b)=>a+b,0)) * 100,
                                 drilldown: 'F'
                             },
 
@@ -261,15 +252,138 @@
                 }
             }); //内靛场
         }
+    }
+    let center_chart1 = {
+        init:function () {
+            $.ajax({
+                url : '/chart1',
+                success : function (data) {
+                    center_chart1.display(data)
+                }
+            })
+        },
+        display : function (data) {
+            Highcharts.chart('container1', {
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: 'Monthly Average Temperature'
+                },
+                subtitle: {
+                    text: 'Source: ' +
+                        '<a href="https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature" ' +
+                        'target="_blank">Wikipedia.com</a>'
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    accessibility: {
+                        description: 'Months of the year'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature'
+                    },
+                    labels: {
+                        formatter: function () {
+                            return this.value + '∑';
+                        }
+                    }
+                },
+                tooltip: {
+                    crosshairs: true,
+                    shared: true
+                },
+                plotOptions: {
+                    spline: {
+                        marker: {
+                            radius: 4,
+                            lineColor: '#666666',
+                            lineWidth: 1
+                        }
+                    }
+                },
+                series: data
+            });
+        }
     };
+    let center_chart2 = {
+        init: function () {
+            $.ajax({
+                url : '/chart1',
+                success : function (data) {
+                    center_chart2.display(data)
+                }
+            })
+        },
+        display : function (data) {
+            Highcharts.chart('container2', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Monthly Average Rainfall'
+                },
+                subtitle: {
+                    text: 'Source: WorldClimate.com'
+                },
+                xAxis: {
+                    categories: [
+                        'Jan',
+                        'Feb',
+                        'Mar',
+                        'Apr',
+                        'May',
+                        'Jun',
+                        'Jul',
+                        'Aug',
+                        'Sep',
+                        'Oct',
+                        'Nov',
+                        'Dec'
+                    ],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Rainfall (mm)'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: data
+            });
+        }
+    };
+
+
     $(function (){
+        center_chart1.init();
+        center_chart2.init();
         websocket_center.init();
-        salesChart.init();
-        pieChart.init();
-        getData.init();
+
+        setInterval(center_chart1.init, 5000);
+        setInterval(center_chart2.init, 15000);
     });
 
 </script>
+
+
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -432,7 +546,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <figure class="highcharts-figure">
-                        <div id="scontainer"></div>
+                        <div id="container1"></div>
                     </figure>
                 </div>
             </div>
@@ -463,11 +577,12 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <figure class="highcharts-figure">
-                        <div id="pcontainer"></div>
+                        <div id="container2"></div>
                     </figure>
                 </div>
             </div>
         </div>
+        
     </div>
 
     <!-- Content Row -->
@@ -624,3 +739,4 @@
 
     </div>
     <!-- /.container-fluid -->
+</div>

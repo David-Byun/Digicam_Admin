@@ -2,6 +2,7 @@ package com.kbstar.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @ToString
+@Setter
 public class Cart {
     private int id;
     private String custId;

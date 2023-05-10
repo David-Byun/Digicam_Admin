@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
-//@EnableScheduling
+@EnableScheduling
 public class Admin {
 
     public static void main(String[] args) {

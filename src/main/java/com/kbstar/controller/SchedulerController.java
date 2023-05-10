@@ -40,24 +40,24 @@ public class SchedulerController {
         messagingTemplate.convertAndSend("/sendadm", msg);
     }
 
-//    //8초마다 한번씩 로그를 찍자.
-//    @Scheduled(cron = "*/8 * * * * *")
-//    public void cronJobWeeklyUpdate(){
-//        Random r = new Random();
-//        int num = r.nextInt(100)+1;
-//        log.info(num + "");
-//        //string 이여야 하므로 "" 붙여줌
-//
-//    }
-
+    //8초마다 한번씩 로그를 찍자.
     @Scheduled(cron = "* * * 1 * *")
-    public void cronJobWeeklyUpdate() throws Exception {
-        List<Cart> list = cartService.get();
-        int total = 0;
-        for (Cart obj: list){
-            total += obj.getItem_price() * obj.getCnt();
-        }
-        log.info(total+"");
+    public void cronJobWeeklyUpdate(){
+        Random r = new Random();
+        int num = r.nextInt(100)+1;
+        log.info(num + "");
+        //string 이여야 하므로 "" 붙여줌
+
     }
+
+//    @Scheduled(cron = "* * * * * *")
+//    public void cronJobWeeklyUpdate() throws Exception {
+//        List<Cart> list = cartService.get();
+//        int total = 0;
+//        for (Cart obj: list){
+//            total += obj.getItem_price() * obj.getCnt();
+//        }
+//        log.info(total+"");
+//    }
 
 }

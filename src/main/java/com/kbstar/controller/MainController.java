@@ -26,28 +26,6 @@ public class MainController {
 
     @RequestMapping("/")
     public String index(Model model) {
-        List<Sales> monthly = service.getMonthly();
-        JSONArray jaMale = new JSONArray();
-        JSONArray jaFemale = new JSONArray();
-        for (Sales obj : monthly) {
-            JSONObject joMale = new JSONObject();
-            JSONObject joFemale = new JSONObject();
-            if (obj.getGender() == "여성" || obj.getGender().equals("여성")) {
-                joFemale.put("female", obj.getGender());
-                joFemale.put("monthly", obj.getMonthly());
-                joFemale.put("sum", obj.getSum());
-                jaFemale.add(joFemale);
-
-            } else {
-                joMale.put("male", obj.getGender());
-                joMale.put("monthly", obj.getMonthly());
-                joMale.put("sum", obj.getSum());
-                jaMale.add(joMale);
-
-            }
-        }
-        model.addAttribute("dataMale", jaMale);
-        model.addAttribute("dataFemale", jaFemale);
         model.addAttribute("adminserver", adminserver);
         return "index";
     }
